@@ -1,0 +1,49 @@
+# Checks the official conference pages once a week and opens (or updates) a GitHub issue
+# when a deadline is announced, changes, passes, or is less than 3 weeks away.
+# You'll get the issue notification by email. Nothing is edited automatically.
+name: Check conference deadlines
+
+on:
+  schedule:
+    - cron: "17 1 * * 1"     # every Monday 01:17 UTC (09:17 Singapore)
+  workflow_dispatch:          # "Run workflow" button on the Actions tab
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check official pages
+        run: python check_deadlines.py --out report.md
+
+      - name: Open or update the tracking issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "## Report" >> "$GITHUB_STEP_SUMMARY"
+          cat report.md >> "$GITHUB_STEP_SUMMARY"
+          if ! head -n1 report.md | grep -q '^ACTION NEEDED'; then
+            echo "Nothing to report."; exit 0
+          fi
+          gh label create deadline-check --color FBCA04 --description "Automatic deadline check" 2>/dev/null || true
+          num=$(gh issue list --label deadline-check --state open --json number --jq '.[0].number')
+          if [ -n "$num" ]; then
+            # Skip if nothing changed since the last report (ignoring the date line and countdowns)
+            last=$(gh issue view "$num" --json body,comments --jq 'if (.comments|length)>0 then .comments[-1].body else .body end')
+            norm() { grep -v '^# Conference deadline check' | sed -E 's/in [0-9]+ days/in N days/'; }
+            if [ "$(printf '%s' "$last" | norm)" = "$(norm < report.md)" ]; then
+              echo "Same as last report; not commenting."; exit 0
+            fi
+            gh issue comment "$num" --body-file report.md
+          else
+            gh issue create --title "Conference deadlines need attention" --label deadline-check --body-file report.md
+          fi

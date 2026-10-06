@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WHATSUB</title>
+<style>
+:root{
+  --bg:#0f1420; --panel:#171f2e; --ink:#e8edf6; --muted:#9aa7bd;
+  --accent:#4ea1ff; --accent2:#7be0c9; --line:#273348;
+  --dom-ap:#f0a868; --dom-rs:#5fd1a6; --dom-ml:#c98bff; --jr:#ff8aa0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:
+  radial-gradient(1200px 600px at 80% -10%,#1b2740 0%,transparent 60%),#0f1420;
+  color:var(--ink);line-height:1.5;padding:32px 20px 60px}
+.wrap{max-width:1280px;margin:0 auto}
+header h1{font-size:30px;font-weight:700;letter-spacing:.3px}
+header p.sub{color:var(--muted);margin-top:6px;font-size:14px;max-width:820px}
+.updated{color:var(--accent2);font-size:12px;margin-top:8px;font-weight:600}
+.controls{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 6px;align-items:center}
+.controls+.controls{margin-top:4px}
+.seg{display:flex;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.seg button{background:transparent;color:var(--muted);border:0;padding:9px 16px;font-size:13.5px;cursor:pointer;font-weight:600}
+.seg button.active{background:linear-gradient(135deg,#2a3c5e,#223150);color:#fff}
+.lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:700;margin-right:2px}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--panel);border:1px solid var(--line);color:var(--muted);padding:7px 14px;border-radius:20px;font-size:12.5px;cursor:pointer;font-weight:600}
+.chip.active{color:#fff;border-color:var(--accent);background:#1c2b45}
+.chip.rk{padding:7px 12px;min-width:38px;text-align:center}
+select{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px;max-width:100%}
+label.tg{font-size:12.5px;color:var(--muted);display:flex;gap:6px;align-items:center;cursor:pointer}
+.count{color:var(--muted);font-size:13px;margin-left:auto}
+.viewbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(360px,100%),1fr));gap:18px;margin-top:20px}
+.card{background:linear-gradient(170deg,var(--panel),#141b28);border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px;position:relative;overflow:hidden;transition:transform .15s,border-color .15s,box-shadow .3s}
+.card:hover{transform:translateY(-3px);border-color:#38507a}
+.card.flash{box-shadow:0 0 0 2px var(--accent)}
+.card.rolled{border-style:dashed}
+.card .bar{position:absolute;left:0;top:0;bottom:0;width:5px}
+.card h3{font-size:17px;font-weight:700;padding-right:110px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.tag{font-size:10px;letter-spacing:.4px;text-transform:uppercase;font-weight:700;padding:3px 8px;border-radius:6px;border:1px solid}
+.tag-type{background:#11263a;color:#7bc0ff;border-color:#244a6b}
+.tag-gs{background:#1a73e8;color:#fff;border-color:#1a73e8;font-weight:600}
+.tag-q{background:#162a20;color:#8fd9b0;border-color:#2f5a44}
+.tag-q.q-Q2{background:#2f3410;color:#dfe36a;border-color:#5a6119}
+.tag-q.q-Q3,.tag-q.q-Q4{background:#3a2410;color:#ffb067;border-color:#6b4019}
+.diff{position:absolute;top:16px;right:16px;font-size:10.5px;font-weight:700;padding:4px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.4px}
+.d-ext{background:#3a1420;color:#ff7a93;border:1px solid #6b1f31}
+.d-vhigh{background:#3a2410;color:#ffb067;border:1px solid #6b4019}
+.d-high{background:#2f3410;color:#dfe36a;border:1px solid #5a6119}
+.d-med{background:#10342a;color:#5fd1a6;border:1px solid #1d5a49}
+.rank{font-size:11px;font-weight:800;padding:2px 8px;border-radius:6px;border:1px solid;letter-spacing:.5px}
+.r-S{background:#3a2e08;color:#ffd54a;border-color:#7a6111}
+.r-A{background:#13283f;color:#7bc0ff;border-color:#2a5584}
+.r-B{background:#1b2e24;color:#8fd9b0;border-color:#2f5a44}
+.r-C{background:#24262c;color:#b5bccb;border-color:#444a57}
+.metrics{display:flex;gap:8px;margin:14px 0 12px;flex-wrap:wrap}
+.metric{flex:1;min-width:66px;background:#0e1623;border:1px solid var(--line);border-radius:11px;padding:9px 6px;text-align:center}
+.metric .v{font-size:18px;font-weight:700;color:var(--accent2)}
+.metric .l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+.row{display:flex;gap:8px;align-items:flex-start;font-size:13px;margin-top:7px}
+.row .ic{color:var(--accent);flex:none;width:16px;text-align:center}
+.row .k{color:var(--muted);min-width:60px;flex:none}
+.fit{font-size:12.5px;color:#c3cde0;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+a.web{color:var(--accent);text-decoration:none;word-break:break-all}
+a.web:hover{text-decoration:underline}
+.cd{font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px;margin-left:6px;white-space:nowrap}
+.cd-hot{background:#3a1420;color:#ff7a93}.cd-warm{background:#3a2410;color:#ffb067}
+.cd-ok{background:#10342a;color:#5fd1a6}.cd-none{background:#222b3b;color:var(--muted)}
+.est{font-size:10px;font-weight:700;color:#ffb067;border:1px dashed #6b4019;border-radius:5px;padding:1px 5px;margin-left:6px;text-transform:uppercase}
+.dl{display:flex;flex-direction:column;gap:2px}.dl small{color:var(--muted);font-size:11.5px}
+.rollnote{font-size:11.5px;color:#ffb067;margin-top:4px}
+.panel{background:linear-gradient(170deg,var(--panel),#141b28);border:1px solid var(--line);border-radius:16px;padding:14px 10px;margin-top:20px;overflow-x:auto}
+.panel svg{display:block}
+.panel svg text{font-family:inherit}
+.panel .hint{color:var(--muted);font-size:12.5px;padding:2px 8px 10px}
+.pt,.tl-row{cursor:pointer}
+.pt:hover circle{stroke:#fff;stroke-width:2}
+.tl-row:hover rect.hl{fill:rgba(78,161,255,.08)}
+.note{margin-top:30px;font-size:12px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:12px 16px}
+.legend{margin-top:34px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 22px}
+.legend-title{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:700;margin-bottom:12px}
+.legend-row{display:flex;gap:14px;align-items:baseline;margin-bottom:10px;flex-wrap:wrap}
+.legend-row:last-child{margin-bottom:0}
+.dir{flex:0 0 auto;font-weight:700;font-size:13px;padding:4px 12px;border-radius:20px;white-space:nowrap}
+.dir.up{color:#7be0c9;background:rgba(123,224,201,.12);border:1px solid rgba(123,224,201,.35)}
+.dir.down{color:#ffb570;background:rgba(255,181,112,.12);border:1px solid rgba(255,181,112,.35)}
+.legend-items{color:var(--ink);font-size:13px;line-height:1.7;flex:1 1 300px}
+footer{margin-top:24px;text-align:center;color:var(--muted);font-size:12px}
+.hidden{display:none!important}
+@media (max-width:600px){ body{padding:20px 16px 40px} header h1{font-size:23px} .count{margin-left:0} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>&#128218; WHATSUB - Publication Targets Dashboard</h1>
+  <p class="sub">Conferences &amp; journals for <b>antenna/propagation</b>, <b>remote sensing</b>, and <b>machine/deep learning</b>. Difficulty &amp; best-fit notes are from <em>Publications.pdf</em>; deadlines are checked against official conference sites; quartiles &amp; SJR from SCImago.</p>
+  <div class="updated" id="updated"></div>
+</header>
+
+<div class="viewbar">
+  <span class="lbl">View</span>
+  <div class="seg" id="segView">
+    <button data-v="cards" class="active">Cards</button>
+    <button data-v="timeline">Timeline</button>
+    <button data-v="chart">Chart</button>
+  </div>
+  <select id="sort" aria-label="Sort"></select>
+  <select id="preset" class="hidden" aria-label="Chart"></select>
+  <span class="count" id="count"></span>
+</div>
+
+<div class="controls">
+  <span class="lbl">Type</span>
+  <div class="seg" id="segType">
+    <button data-v="all" class="active">All</button>
+    <button data-v="Conference">Conferences</button>
+    <button data-v="Journal">Journals</button>
+  </div>
+  <span class="lbl">Domain</span>
+  <div class="filters" id="domFilters"></div>
+</div>
+<div class="controls">
+  <span class="lbl">Tier</span>
+  <div class="filters" id="rankFilters"></div>
+  <span class="lbl" style="margin-left:6px">Quartile</span>
+  <div class="filters" id="qFilters"></div>
+</div>
+<div class="controls">
+  <span class="lbl">Deadline</span>
+  <select id="dlWin" aria-label="Deadline window">
+    <option value="any">Any (all venues)</option>
+    <option value="30">Conferences &middot; next 30 days</option>
+    <option value="90">Conferences &middot; next 3 months</option>
+    <option value="180">Conferences &middot; next 6 months</option>
+    <option value="365">Conferences &middot; next 12 months</option>
+  </select>
+  <label class="tg"><input type="checkbox" id="incEst" checked> include estimated dates</label>
+</div>
+
+<div class="grid" id="grid"></div>
+<div class="panel hidden" id="timeline"></div>
+<div class="panel hidden" id="chart"></div>
+<div class="note" id="note"></div>
+
+<div class="legend">
+  <div class="legend-title">How to read the metrics</div>
+  <div class="legend-row">
+    <span class="dir up">▲ Higher is better</span>
+    <span class="legend-items">Impact Factor &middot; CiteScore &middot; SJR &middot; h5-index &mdash; larger values signal greater reach, visibility and influence.</span>
+  </div>
+  <div class="legend-row">
+    <span class="dir down">▼ Lower is better</span>
+    <span class="legend-items">Acceptance rate &mdash; a lower figure means the venue is more selective. Difficulty is a qualitative rating: higher difficulty = harder to publish.</span>
+  </div>
+</div>
+<div class="legend" style="margin-top:14px">
+  <div class="legend-title">Tiers, quartiles &amp; deadlines</div>
+  <div class="legend-row"><span class="legend-items" id="rankLegend"></span></div>
+  <div class="legend-row"><span class="legend-items"><b>Quartile</b> = best SCImago (SJR) category quartile; Q1 = top 25% of journals in that category. JCR quartiles (Web of Science) can differ.</span></div>
+  <div class="legend-row"><span class="legend-items">Deadlines are full-paper deadlines, Anywhere on Earth (UTC&minus;12). <span class="est" style="margin-left:0">est.</span> = projected from the previous edition, not yet announced. When a deadline passes, the card <b>rolls over automatically</b> to the next edition with a projected date (dashed border) until you enter the official one. Countdown: <span class="cd cd-hot">&le;14 days</span><span class="cd cd-warm">&le;45 days</span><span class="cd cd-ok">later</span></span></div>
+</div>
+<footer>Data: <a class="web" href="venues.json">venues.json</a> &middot; Metrics shown are approximate and for verification.</footer>
+</div>
+
+<script>
+const DATA_URL='venues.json';
+const domColor={"Antenna/Propagation":"#f0a868","Remote Sensing":"#5fd1a6","ML/DL":"#c98bff"};
+const domLabel={"Antenna/Propagation":"Antenna / Propagation","Remote Sensing":"Remote Sensing","ML/DL":"Machine / Deep Learning"};
+const RANKS=["S","A","B","C"], QS=["Q1","Q2","Q3","Q4"];
+let DATA={conferences:[],journals:[]};
+let view="cards", typeView="all", domView="All", rankView="All", qView="All";
+
+// ---------- loading ----------
+async function loadData(){
+  try{
+    const r=await fetch(DATA_URL,{cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const j=await r.json();
+    if(!j.conferences||!j.journals) throw new Error('missing "conferences" or "journals"');
+    DATA=j; prepare();
+    const m=j.meta||{};
+    document.getElementById('updated').textContent=[m.updated&&('Data last updated: '+m.updated), m.deadline_checked&&('deadlines checked: '+m.deadline_checked)].filter(Boolean).join(' · ');
+  }catch(e){
+    document.getElementById('grid').innerHTML=
+      '<div class="note" style="grid-column:1/-1;border-left-color:#ff7a93">&#9888; Could not load <b>'+DATA_URL+'</b> ('+e.message+'). '+
+      'Make sure it sits in the same folder as this page. If you opened the page by double-clicking it, browsers block this: '+
+      'serve the folder instead (e.g. <code>python -m http.server</code>, then open http://localhost:8000) or use the hosted GitHub Pages link.</div>';
+    throw e;
+  }
+}
+
+// ---------- dates & automatic rollover ----------
+// A deadline "YYYY-MM-DD" means 23:59 Anywhere-on-Earth (UTC-12) that day
+function dlTime(s){ return s ? Date.parse(s+'T23:59:00-12:00') : null; }
+function addYears(s,n){ const d=new Date(s+'T00:00:00Z'); d.setUTCFullYear(d.getUTCFullYear()+n); return d.toISOString().slice(0,10); }
+function fmtDate(s){ return new Date(s+'T12:00:00Z').toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'}); }
+function prepare(){
+  const now=Date.now();
+  DATA.conferences.forEach(c=>{
+    c._name=c.name; c._dl=c.deadline_date; c._status=c.deadline_status; c._rolled=null;
+    const cy=c.cycle_years||1; let n=0;
+    while(c._dl && dlTime(c._dl)<now && n<10){ c._dl=addYears(c._dl,cy); n++; }
+    if(n){
+      c._rolled=c.deadline_date; c._status='estimated';
+      c._name=c.name.replace(/(\d{4})(?!.*\d{4})/,y=>String(+y+n*cy));
+    }
+  });
+  DATA.journals.forEach(j=>{ j._name=j.name; });
+  [...DATA.conferences,...DATA.journals].forEach(i=>{ i._id='v-'+i.name.toLowerCase().replace(/[^a-z0-9]+/g,'-'); });
+}
+function daysLeft(i){ const t=dlTime(i._dl); return t==null?null:Math.ceil((t-Date.now())/864e5); }
+function countdown(i){
+  const d=daysLeft(i);
+  if(d==null) return '<span class="cd cd-none">TBA</span>';
+  const cls=d<=14?'cd-hot':d<=45?'cd-warm':'cd-ok';
+  return `<span class="cd ${cls}">${d===0?'today':d===1?'1 day':d+' days'}</span>`;
+}
+function shortName(i){ return i.short || i._name.replace(/^(IEEE|ACM) /,'').replace(/ \d{4}$/,''); }
+
+// ---------- filters ----------
+function rankDesc(r){ return (DATA.meta&&DATA.meta.rank_scale&&DATA.meta.rank_scale[r])||''; }
+function chipRow(id,values,current,label,onPick,title){
+  const f=document.getElementById(id); f.innerHTML='';
+  ["All",...values].forEach(v=>{
+    const b=document.createElement('div');
+    b.className='chip'+(id!=='domFilters'?' rk':'')+(v===current?' active':'');
+    b.textContent=v==="All"?"All":label(v);
+    if(title) b.title=v==="All"?"All":title(v);
+    if(id==='domFilters'&&v!=="All") b.style.borderLeft="4px solid "+domColor[v];
+    b.onclick=()=>onPick(v);
+    f.appendChild(b);
+  });
+}
+function buildFilters(){
+  chipRow('domFilters',Object.keys(domLabel),domView,v=>domLabel[v],v=>{domView=v;render();});
+  chipRow('rankFilters',RANKS,rankView,v=>v,v=>{rankView=v;render();},rankDesc);
+  chipRow('qFilters',QS,qView,v=>v,v=>{qView=v;render();},v=>'Journals in SCImago '+v);
+  document.getElementById('rankLegend').innerHTML='<b>Tier</b> (editable in venues.json): '+RANKS.map(r=>`<span class="rank r-${r}">${r}</span> ${rankDesc(r)}`).join(' &nbsp;&middot;&nbsp; ');
+}
+// typeOverride lets the chart force conferences or journals
+function filtered(typeOverride){
+  const t=typeOverride||typeView;
+  let items=[...DATA.conferences,...DATA.journals];
+  if(t!=="all") items=items.filter(i=>i.type===t);
+  if(domView!=="All")  items=items.filter(i=>i.domain===domView);
+  if(rankView!=="All") items=items.filter(i=>i.rank===rankView);
+  if(qView!=="All")    items=items.filter(i=>i.type==="Journal" && i.quartile===qView);
+  const win=document.getElementById('dlWin').value, incEst=document.getElementById('incEst').checked;
+  if(win!=="any"){
+    items=items.filter(i=>{
+      if(i.type!=="Conference") return false;
+      if(!incEst && i._status!=="confirmed") return false;
+      const d=daysLeft(i); return d!=null && d>=0 && d<=+win;
+    });
+  }
+  return items;
+}
+
+// ---------- render dispatcher ----------
+function render(){
+  buildFilters();
+  ['grid','timeline','chart'].forEach(id=>document.getElementById(id).classList.toggle('hidden', id!==(view==='cards'?'grid':view)));
+  document.getElementById('sort').classList.toggle('hidden',view!=='cards');
+  document.getElementById('preset').classList.toggle('hidden',view!=='chart');
+  if(view==='cards') renderCards();
+  else if(view==='timeline') renderTimeline();
+  else renderChart();
+  document.getElementById('note').innerHTML="&#9432; <b>Difficulty, access &amp; best-fit</b> come from your PDF; <b>deadlines</b> were checked on official sites (each card links its source) &mdash; dates marked <i>est.</i> are projections. For journals, <b>Impact Factor, CiteScore &amp; h5-index</b> are approximate &mdash; verify against the latest JCR / Scopus.";
+}
+function setCount(n,extra){ document.getElementById('count').textContent=n+" venue"+(n===1?"":"s")+(extra||''); }
+
+// ---------- cards ----------
+const diffRank={"extremely high":5,"very high":4,"high":3,"medium-high":2,"medium":1,"moderate":2};
+function diffClass(d){d=(d||"").toLowerCase();
+  if(d.includes("extremely"))return"d-ext"; if(d.includes("very"))return"d-vhigh";
+  if(d.includes("high")&&!d.includes("medium"))return"d-high"; return"d-med";}
+function renderCards(){
+  const grid=document.getElementById('grid'); grid.innerHTML='';
+  const sort=document.getElementById('sort').value;
+  const items=filtered();
+  items.sort((a,b)=>{
+    if(sort==="name")return a._name.localeCompare(b._name);
+    if(sort==="difficulty")return (diffRank[(b.difficulty||'').toLowerCase()]||0)-(diffRank[(a.difficulty||'').toLowerCase()]||0);
+    if(sort==="gsrank")return (a.gsrank||9999)-(b.gsrank||9999);
+    if(sort==="deadline"){ const k=x=>{const d=daysLeft(x); return d==null?1e9:d;}; return k(a)-k(b); }
+    if(sort==="rank")return RANKS.indexOf(a.rank)-RANKS.indexOf(b.rank);
+    return (b[sort]||0)-(a[sort]||0);
+  });
+  setCount(items.length);
+  if(!items.length){ grid.innerHTML='<div class="note" style="grid-column:1/-1">No venues match these filters.</div>'; return; }
+  items.forEach(i=>grid.appendChild(card(i)));
+}
+function card(i){
+  const isJ=i.type==="Journal";
+  const el=document.createElement('div'); el.className='card'+(i._rolled?' rolled':''); el.id=i._id;
+  const metrics = isJ
+   ? `<div class="metric"><div class="v">${i.impact??'&ndash;'}</div><div class="l">Impact F.</div></div>
+      <div class="metric"><div class="v">${i.citescore??'&ndash;'}</div><div class="l">CiteScore</div></div>
+      <div class="metric"><div class="v">${i.sjr??'&ndash;'}</div><div class="l">SJR</div></div>
+      <div class="metric"><div class="v">${i.h5??'&ndash;'}</div><div class="l">h5-index</div></div>`
+   : `<div class="metric"><div class="v">${i.h5||'&ndash;'}</div><div class="l">h5-index</div></div>
+      <div class="metric"><div class="v">${i.accept||'&ndash;'}</div><div class="l">Accept.</div></div>`;
+  const src=u=>u?` &middot; <a class="web" style="white-space:nowrap" href="${u}" target="_blank" rel="noopener">source</a>`:'';
+  const detailRows = isJ
+   ? (i.access?`<div class="row"><span class="ic">&#128275;</span><span class="k">Access</span><span>${i.access}</span></div>`:'')
+   : `<div class="row"><span class="ic">&#9203;</span><span class="k">Deadline</span><span class="dl">
+        <span>${i._dl?fmtDate(i._dl):'TBA'}${i._status==='estimated'?'<span class="est">est.</span>':''}${countdown(i)}</span>
+        ${i._rolled
+          ? `<span class="rollnote">&#8635; ${i.name} closed ${fmtDate(i._rolled)} &mdash; projected next edition (${i.cycle_years||1}-year cycle). Update venues.json when announced.</span>`
+          : `<small>${i.deadline||''}${src(i.deadline_source)}</small>`}</span></div>
+      ${!i._rolled&&(i.conf_dates||i.location)?`<div class="row"><span class="ic">&#128205;</span><span class="k">Event</span><span>${[i.conf_dates,i.location].filter(Boolean).join(' &middot; ')}</span></div>`:''}`;
+  el.innerHTML=`
+   <div class="bar" style="background:${domColor[i.domain]}"></div>
+   <div class="diff ${diffClass(i.difficulty)}">${i.difficulty}</div>
+   <h3>${i._name}</h3>
+   <div class="tags">
+     ${i.rank?`<span class="rank r-${i.rank}" title="${rankDesc(i.rank)}">${i.rank}</span>`:''}
+     <span class="tag tag-type">${i.type}</span>
+     ${i.quartile?`<a class="tag tag-q q-${i.quartile}" href="${i.quartile_source||'#'}" target="_blank" rel="noopener" title="SCImago 2025 best quartile" style="text-decoration:none">${i.quartile}</a>`:''}
+     ${i.gsrank?`<span class="tag tag-gs">&#9733; GS Remote Sensing #${i.gsrank}</span>`:''}
+     <span class="tag" style="color:${domColor[i.domain]};border-color:${domColor[i.domain]};background:transparent">${domLabel[i.domain]}</span>
+   </div>
+   <div class="metrics">${metrics}</div>
+   ${detailRows}
+   <div class="row"><span class="ic">&#127760;</span><span class="k">Website</span><a class="web" href="${i.website}" target="_blank" rel="noopener">${i.website.replace('https://','').slice(0,46)}</a></div>
+   <div class="fit">${i.fit}</div>`;
+  return el;
+}
+function jumpTo(id){
+  view='cards'; setSeg('segView','cards'); render();
+  const el=document.getElementById(id); if(!el) return;
+  el.scrollIntoView({behavior:'smooth',block:'center'});
+  el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'),1600);
+}
+
+// ---------- timeline ----------
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+function renderTimeline(){
+  const el=document.getElementById('timeline');
+  if(typeView==='Journal'){ el.innerHTML='<div class="hint">Journals have no deadlines &mdash; switch Type to All or Conferences.</div>'; setCount(0); return; }
+  const confs=filtered().filter(i=>i.type==='Conference');
+  const now=Date.now(), start=now-10*864e5, end=now+365*864e5;
+  const inWin=i=>i._dl && dlTime(i._dl)<=end;
+  const dated=confs.filter(inWin).sort((a,b)=>dlTime(a._dl)-dlTime(b._dl));
+  const rest=confs.filter(i=>!inWin(i));
+  setCount(confs.length);
+  const W=Math.max(el.clientWidth-20,320), narrow=W<640;
+  const L=narrow?104:200, R=narrow?16:24, top=36, rowH=30, H=top+Math.max(dated.length,1)*rowH+8;
+  const x=t=>L+(t-start)/(end-start)*(W-L-R);
+  let s=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Deadline timeline">`;
+  dated.forEach((_,k)=>{ if(k%2===0) s+=`<rect x="0" y="${top+k*rowH}" width="${W}" height="${rowH}" style="fill:rgba(255,255,255,.025)"/>`; });
+  const m=new Date(start); m.setUTCDate(1); m.setUTCMonth(m.getUTCMonth()+1); m.setUTCHours(0,0,0,0);
+  for(;m.getTime()<=end;m.setUTCMonth(m.getUTCMonth()+1)){
+    const xx=x(m.getTime()), mo=m.getUTCMonth();
+    s+=`<line x1="${xx}" x2="${xx}" y1="${top-6}" y2="${H}" style="stroke:#273348"/>`;
+    if((!narrow||mo%2===0) && Math.abs(xx-x(now))>34) s+=`<text x="${xx+3}" y="${top-12}" style="fill:#9aa7bd;font-size:11px">${m.toLocaleDateString(undefined,{month:'short',timeZone:'UTC'})}${mo===0?" '"+String(m.getUTCFullYear()).slice(2):''}</text>`;
+  }
+  const xt=x(now);
+  s+=`<line x1="${xt}" x2="${xt}" y1="${top-6}" y2="${H}" style="stroke:#4ea1ff;stroke-dasharray:4 3"/><text x="${xt-3}" y="${top-12}" text-anchor="end" style="fill:#4ea1ff;font-size:11px;font-weight:700">today</text>`;
+  dated.forEach((i,k)=>{
+    const y=top+k*rowH+rowH/2, xd=x(dlTime(i._dl)), col=domColor[i.domain], est=i._status!=='confirmed', d=daysLeft(i);
+    const nm=narrow&&i._name.length>13?i._name.slice(0,12)+'…':i._name;
+    const tip=`${i._name} — ${fmtDate(i._dl)}${est?' (estimated)':''}, ${d} days\n${[i.conf_dates,i.location].filter(Boolean).join(' · ')}`;
+    s+=`<g class="tl-row" data-id="${i._id}"><title>${esc(tip)}</title><rect class="hl" x="0" y="${y-rowH/2}" width="${W}" height="${rowH}" style="fill:transparent"/>`;
+    s+=`<text x="${L-10}" y="${y+4}" text-anchor="end" style="fill:#e8edf6;font-size:12.5px;font-weight:600">${esc(nm)}</text>`;
+    s+=`<line x1="${xt}" x2="${xd}" y1="${y}" y2="${y}" style="stroke:${col};stroke-opacity:.35;stroke-width:2"/>`;
+    if(i.abstract_date && dlTime(i.abstract_date)>now){ const xa=x(dlTime(i.abstract_date)); s+=`<line x1="${xa}" x2="${xa}" y1="${y-6}" y2="${y+6}" style="stroke:${col};stroke-width:2"/>`; }
+    s+=`<circle cx="${xd}" cy="${y}" r="6" style="fill:${est?'#171f2e':col};stroke:${col};stroke-width:2${est?';stroke-dasharray:3 2':''}"/>`;
+    const lab=`${d}d`, right=xd+12+lab.length*7<W;
+    s+=`<text x="${right?xd+11:xd-11}" y="${y+4}" text-anchor="${right?'start':'end'}" style="fill:#9aa7bd;font-size:11px">${lab}</text></g>`;
+  });
+  if(!dated.length) s+=`<text x="${L}" y="${top+20}" style="fill:#9aa7bd;font-size:13px">No deadlines in the next 12 months for these filters.</text>`;
+  s+='</svg>';
+  el.innerHTML=`<div class="hint">Next 12 months &middot; filled dot = confirmed, dashed = estimated &middot; tick = abstract deadline &middot; click a row to open its card</div>${s}`+
+    (rest.length?`<div class="hint" style="padding-top:10px">Later or TBA: ${rest.map(i=>`${esc(i._name)} (${i._dl?fmtDate(i._dl):'TBA'})`).join(' &middot; ')}</div>`:'');
+  el.querySelectorAll('.tl-row').forEach(g=>g.onclick=()=>jumpTo(g.dataset.id));
+}
+
+// ---------- scatter chart ----------
+const num=v=>{ const n=parseFloat(String(v??'').replace(/[^\d.]/g,'')); return isNaN(n)?null:n; };
+const PRESETS={
+  j_if_h5:{label:'Journals · Impact Factor vs h5-index',type:'Journal',x:i=>i.h5,y:i=>i.impact,xl:'h5-index (Google Scholar)',yl:'Impact Factor',
+    hint:'Top-right = highly cited and high impact. Low h5 with high IF usually means a small, selective journal.'},
+  j_if_sjr:{label:'Journals · Impact Factor vs SJR',type:'Journal',x:i=>i.impact,y:i=>i.sjr,xl:'Impact Factor',yl:'SJR (SCImago)',
+    hint:'SJR weights citations by the prestige of the citing journal; points well above the trend are cited by top venues.'},
+  c_acc_h5:{label:'Conferences · acceptance rate vs h5-index',type:'Conference',x:i=>num(i.accept),y:i=>i.h5,xl:'Acceptance rate (%)',yl:'h5-index',
+    hint:'Top-right = high visibility with a comparatively generous acceptance rate — the best effort-to-reach ratio. Top-left = prestigious but very selective.'}
+};
+function niceStep(range,n){ const r=range/n, p=Math.pow(10,Math.floor(Math.log10(r))), f=r/p; return (f<1.5?1:f<3?2:f<7?5:10)*p; }
+function renderChart(){
+  const el=document.getElementById('chart'), P=PRESETS[document.getElementById('preset').value];
+  const all=filtered(P.type), pts=all.filter(i=>P.x(i)!=null&&P.y(i)!=null), miss=all.filter(i=>!pts.includes(i));
+  setCount(pts.length);
+  const W=Math.max(el.clientWidth-20,320), narrow=W<640, H=narrow?380:480, ml=54, mr=20, mt=16, mb=46;
+  const xmaxRaw=Math.max(...pts.map(P.x),1), ymaxRaw=Math.max(...pts.map(P.y),1);
+  const xs=niceStep(xmaxRaw,narrow?4:6), ys=niceStep(ymaxRaw,5);
+  const xmax=Math.ceil(xmaxRaw*1.08/xs)*xs, ymax=Math.ceil(ymaxRaw*1.08/ys)*ys;
+  const X=v=>ml+v/xmax*(W-ml-mr), Y=v=>H-mb-v/ymax*(H-mt-mb);
+  let s=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(P.label)}">`;
+  for(let v=0;v<=xmax+1e-9;v+=xs){ s+=`<line x1="${X(v)}" x2="${X(v)}" y1="${mt}" y2="${H-mb}" style="stroke:#273348"/><text x="${X(v)}" y="${H-mb+16}" text-anchor="middle" style="fill:#9aa7bd;font-size:11px">${+v.toFixed(2)}</text>`; }
+  for(let v=0;v<=ymax+1e-9;v+=ys){ s+=`<line x1="${ml}" x2="${W-mr}" y1="${Y(v)}" y2="${Y(v)}" style="stroke:#273348"/><text x="${ml-8}" y="${Y(v)+4}" text-anchor="end" style="fill:#9aa7bd;font-size:11px">${+v.toFixed(2)}</text>`; }
+  s+=`<text x="${(ml+W-mr)/2}" y="${H-8}" text-anchor="middle" style="fill:#c3cde0;font-size:12px;font-weight:600">${P.xl}</text>`;
+  s+=`<text transform="translate(14 ${(mt+H-mb)/2}) rotate(-90)" text-anchor="middle" style="fill:#c3cde0;font-size:12px;font-weight:600">${P.yl}</text>`;
+  const boxes=[], fits=b=>b.x1>=ml&&b.x2<=W-mr&&b.y1>=mt-4&&b.y2<=H-mb&&!boxes.some(o=>!(b.x2<o.x1||b.x1>o.x2||b.y2<o.y1||b.y1>o.y2));
+  pts.forEach(i=>{ const cx=X(P.x(i)), cy=Y(P.y(i)); boxes.push({x1:cx-8,x2:cx+8,y1:cy-8,y2:cy+8}); }); // reserve every dot before placing labels
+  pts.sort((a,b)=>P.y(b)-P.y(a)).forEach(i=>{
+    const cx=X(P.x(i)), cy=Y(P.y(i)), col=domColor[i.domain], lab=shortName(i), w=lab.length*6.4+2;
+    const cand=[[cx+10,cy+4,'start',cx+10,cx+10+w],[cx-10,cy+4,'end',cx-10-w,cx-10],[cx,cy-11,'middle',cx-w/2,cx+w/2],[cx,cy+19,'middle',cx-w/2,cx+w/2]];
+    let pick=null; for(const c of cand){ const b={x1:c[3],x2:c[4],y1:c[1]-11,y2:c[1]+3}; if(fits(b)){ pick=c; boxes.push(b); break; } }
+    s+=`<g class="pt" data-id="${i._id}"><title>${esc(i._name)}\n${P.xl}: ${P.x(i)}\n${P.yl}: ${P.y(i)}${i.rank?'\nTier '+i.rank:''}</title>`+
+       `<circle cx="${cx}" cy="${cy}" r="7" style="fill:${col};fill-opacity:.85;stroke:#0f1420;stroke-width:1.5"/>`+
+       (pick?`<text x="${pick[0]}" y="${pick[1]}" text-anchor="${pick[2]}" style="fill:#e8edf6;font-size:11.5px">${esc(lab)}</text>`:'')+`</g>`;
+  });
+  s+='</svg>';
+  const leg=Object.keys(domLabel).map(k=>`<span style="display:inline-flex;align-items:center;gap:5px;margin-right:12px"><span style="width:10px;height:10px;border-radius:50%;background:${domColor[k]}"></span>${domLabel[k]}</span>`).join('');
+  el.innerHTML=`<div class="hint">${P.hint}<br>${leg}</div>${s}`+(miss.length?`<div class="hint" style="padding-top:8px">Not plotted (missing value): ${miss.map(i=>esc(i._name)).join(', ')}</div>`:'')+
+    `<div class="hint" style="padding-top:4px">Hover a point for values; click to open its card. Type filter is set by the chart choice; domain, tier, quartile and deadline filters apply.</div>`;
+  el.querySelectorAll('.pt').forEach(g=>g.onclick=()=>jumpTo(g.dataset.id));
+}
+
+// ---------- wiring ----------
+function setSeg(id,v){ document.querySelectorAll('#'+id+' button').forEach(x=>x.classList.toggle('active',x.dataset.v===v)); }
+document.querySelectorAll('#segType button').forEach(b=>b.onclick=()=>{ typeView=b.dataset.v; setSeg('segType',typeView); render(); });
+document.querySelectorAll('#segView button').forEach(b=>b.onclick=()=>{ view=b.dataset.v; setSeg('segView',view); render(); });
+const sortSel=document.getElementById('sort');
+sortSel.innerHTML=[["impact","Impact Factor"],["deadline","Deadline (soonest)"],["rank","Tier"],["sjr","SJR"],["citescore","CiteScore"],["h5","h5-index"],["gsrank","Google Scholar RS rank"],["difficulty","Difficulty"],["name","Name"]].map(([v,l])=>`<option value="${v}">Sort: ${l}</option>`).join('');
+document.getElementById('preset').innerHTML=Object.entries(PRESETS).map(([k,p])=>`<option value="${k}">${p.label}</option>`).join('');
+['sort','preset','dlWin','incEst'].forEach(id=>document.getElementById(id).onchange=render);
+let rz; window.addEventListener('resize',()=>{ clearTimeout(rz); rz=setTimeout(()=>{ if(view!=='cards') render(); },150); });
+loadData().then(render).catch(()=>{});
+</script>
+</body>
+</html>

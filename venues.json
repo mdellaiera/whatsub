@@ -1,7 +1,7 @@
 {
  "meta": {
-  "updated": "2026-10-06",
-  "source": "Deadlines from official conference sites (checked 2026-10-05); metrics approximate (JCR / Scopus / Google Scholar).",
+  "updated": "2026-10-27",
+  "source": "Deadlines from official conference sites (checked 2026-10-27); Remote Sensing (MDPI) IF from JCR 2025 (released Jun 2026); other metrics approximate (JCR / Scopus / Google Scholar).",
   "rank_scale": {
    "S": "Flagship of its field",
    "A": "Top venue, strong reputation",
@@ -14,7 +14,7 @@
    "tba": "No date announced or estimated"
   },
   "quartile_note": "SCImago (SJR) 2025 best quartile, free to verify; JCR quartiles may differ.",
-  "deadline_checked": "2026-10-05"
+  "deadline_checked": "2026-10-27"
  },
  "conferences": [
   {
@@ -22,7 +22,7 @@
    "cat": "CV / ML",
    "tier": "Top CV/ML",
    "difficulty": "Very high",
-   "deadline": "Registration 10 Nov 2026 · paper 16 Nov 2026 (AoE)",
+   "deadline": "Registration 10 Nov 2026 · paper 16 Nov 2026 · supplementary 23 Nov 2026 (AoE, no extensions)",
    "website": "https://cvpr.thecvf.com",
    "h5": 440,
    "accept": "~22%",
@@ -36,7 +36,7 @@
    "deadline_status": "confirmed",
    "conf_dates": "20–25 Jun 2027",
    "location": "Seattle, USA",
-   "deadline_source": "https://cvpr.thecvf.com/Conferences/2027/Dates",
+   "deadline_source": "https://cvpr.thecvf.com/Conferences/2027/CallForPapers",
    "rank": "S",
    "watch_urls": [
     "https://cvpr.thecvf.com/Conferences/2027/Dates"
@@ -75,7 +75,7 @@
    "cat": "CV / ML",
    "tier": "Top CV/ML",
    "difficulty": "Extremely high",
-   "deadline": "Not announced; typically mid-May",
+   "deadline": "Not announced; trackers expect paper ~20 May 2027 (abstract ~1 week earlier)",
    "website": "https://neurips.cc",
    "h5": 340,
    "accept": "~26%",
@@ -84,9 +84,9 @@
    "fit": "Core ML contribution with broad impact, strong experiments, and clear novelty beyond remote sensing.",
    "domain": "ML/DL",
    "type": "Conference",
-   "deadline_date": "2027-05-14",
+   "deadline_date": "2027-05-20",
    "deadline_status": "estimated",
-   "conf_dates": "TBA (Dec 2027)",
+   "conf_dates": "TBA (expected Dec 2027)",
    "location": "Europe (city TBA)",
    "deadline_source": "https://neurips.cc/Conferences/FutureMeetings",
    "rank": "S",
@@ -183,7 +183,7 @@
    "cat": "Remote Sensing",
    "tier": "Top RS conference",
    "difficulty": "Moderate",
-   "deadline": "Submission opens 10 Nov 2026 · abstract/paper 11 Jan 2027",
+   "deadline": "Submission opens 10 Nov 2026 · abstract/manuscript 11 Jan 2027 · notification 12 Mar 2027",
    "website": "https://2027.ieeeigarss.org",
    "h5": 70,
    "accept": "~70%",
@@ -232,12 +232,12 @@
    "cycle_years": 2
   },
   {
-   "name": "EuCAP 2027",
+   "name": "EuCAP 2028",
    "cat": "Electromagnetics",
    "tier": "EM / antennas",
    "difficulty": "Moderate",
-   "deadline": "16 Oct 2026 (firm)",
-   "website": "https://www.eucap2027.org",
+   "deadline": "EuCAP 2027 closed 16 Oct 2026 (no extension). 2028 deadline not announced; expected ~mid-Oct 2027",
+   "website": "https://www.euraap.org/eucap-conferences",
    "h5": 45,
    "accept": "~65%",
    "impact": null,
@@ -245,15 +245,16 @@
    "fit": "Electromagnetic modelling, antennas, propagation, radar, microwave sensing, polarimetry, scattering, physics-informed sensing.",
    "domain": "Antenna/Propagation",
    "type": "Conference",
-   "deadline_date": "2026-10-16",
-   "deadline_status": "confirmed",
-   "conf_dates": "18–23 Apr 2027",
-   "location": "Düsseldorf, Germany",
-   "deadline_source": "https://www.eucap2027.org",
+   "deadline_date": "2027-10-15",
+   "deadline_status": "estimated",
+   "conf_dates": "19–24 Mar 2028",
+   "location": "Porto, Portugal",
+   "deadline_source": "https://www.euraap.org/eucap-conferences",
    "rank": "A",
    "abstract_date": null,
    "watch_urls": [
-    "https://www.eucap2027.org"
+    "https://www.eucap2028.org",
+    "https://www.euraap.org/eucap-conferences"
    ],
    "cycle_years": 1
   },
@@ -262,7 +263,7 @@
    "cat": "Electromagnetics",
    "tier": "EM / antennas",
    "difficulty": "Moderate",
-   "deadline": "11 Jan 2027, 23:59 AoE (no extensions)",
+   "deadline": "11 Jan 2027, 23:59 AoE (no extensions) · AP-S/URSI 2028: San Diego, 2–7 Jul 2028",
    "website": "https://2027.apsursi.org",
    "h5": 60,
    "accept": "~60%",
@@ -275,7 +276,7 @@
    "deadline_status": "confirmed",
    "conf_dates": "20–25 Jun 2027",
    "location": "Kyoto, Japan",
-   "deadline_source": "https://2027.apsursi.org",
+   "deadline_source": "https://2027.apsursi.org/call_for_papers.php",
    "rank": "A",
    "abstract_date": null,
    "watch_urls": [
@@ -445,7 +446,7 @@
    "cat": "Applied AI / Data",
    "tier": "Applied AI",
    "difficulty": "High",
-   "deadline": "Abstract 4 Jan 2027 · paper 11 Jan 2027 (AoE)",
+   "deadline": "Abstract 4 Jan 2027 · paper 11 Jan 2027 (AoE) · notification 21 Apr 2027",
    "website": "https://2027.ijcai.org",
    "h5": 150,
    "accept": "~14%",
@@ -459,7 +460,7 @@
    "deadline_status": "confirmed",
    "conf_dates": "7–13 Aug 2027",
    "location": "Kyoto, Japan",
-   "deadline_source": "https://2027.ijcai.org",
+   "deadline_source": "https://2027.ijcai.org/ijcai-2027-call-for-papers-main-track/",
    "rank": "A",
    "watch_urls": [
     "https://2027.ijcai.org"
@@ -483,7 +484,7 @@
    "deadline_date": "2027-06-26",
    "deadline_status": "estimated",
    "conf_dates": "TBA (Jan 2028)",
-   "location": "TBA",
+   "location": "Waikoloa, Hawaii (reported, not yet official)",
    "deadline_source": "https://wacv.thecvf.com/Conferences/2027/Dates",
    "rank": "B",
    "abstract_date": null,
@@ -497,7 +498,7 @@
    "cat": "Applied AI / Data",
    "tier": "Applied AI",
    "difficulty": "Medium",
-   "deadline": "Not announced (typically spring)",
+   "deadline": "Not announced; BMVC 2026 paper deadline was 29 May 2026 (abstract 22 May)",
    "website": "https://www.bmvc.org",
    "h5": 55,
    "accept": "~30%",
@@ -506,11 +507,11 @@
    "fit": "Applied vision research and methodological extensions.",
    "domain": "ML/DL",
    "type": "Conference",
-   "deadline_date": null,
-   "deadline_status": "tba",
+   "deadline_date": "2027-05-28",
+   "deadline_status": "estimated",
    "conf_dates": "TBA (autumn 2027)",
    "location": "TBA",
-   "deadline_source": "https://www.bmva.org",
+   "deadline_source": "https://bmvc2026.bmva.org/calls/call-for-papers/",
    "rank": "B",
    "abstract_date": null,
    "watch_urls": [
@@ -648,7 +649,7 @@
    "access": "Open access",
    "difficulty": "Medium",
    "website": "https://www.mdpi.com/journal/remotesensing",
-   "impact": 4.2,
+   "impact": 4.3,
    "citescore": 8.3,
    "h5": 168,
    "fit": "Broad remote-sensing applications, methodological extensions, benchmark studies, and special-issue papers.",

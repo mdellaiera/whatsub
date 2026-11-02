@@ -1,6 +1,6 @@
 {
  "meta": {
-  "updated": "2026-10-27",
+  "updated": "2026-11-02",
   "source": "Deadlines from official conference sites (checked 2026-10-27); Remote Sensing (MDPI) IF from JCR 2025 (released Jun 2026); other metrics approximate (JCR / Scopus / Google Scholar).",
   "rank_scale": {
    "S": "Flagship of its field",
@@ -206,7 +206,7 @@
   },
   {
    "name": "EUSAR 2028",
-   "cat": "Remote Sensing",
+   "cat": "Radar",
    "tier": "SAR / radar",
    "difficulty": "Moderate",
    "deadline": "EUSAR 2026 (Baden-Baden, Jun 2026) is over; 2028 not announced",
@@ -216,7 +216,7 @@
    "impact": null,
    "citescore": null,
    "fit": "Synthetic Aperture Radar focus: SAR imaging, interferometry (InSAR), polarimetry, tomography, system/mission design, and SAR processing algorithms.",
-   "domain": "Remote Sensing",
+   "domain": "Radar",
    "type": "Conference",
    "deadline_date": null,
    "deadline_status": "tba",
@@ -230,6 +230,87 @@
     "https://www.eusar.de/en/for-authors"
    ],
    "cycle_years": 2
+  },
+  {
+   "name": "IEEE RadarConf 2027",
+   "cat": "Radar",
+   "tier": "SAR / radar",
+   "difficulty": "Moderate",
+   "deadline": "Paper 30 Nov 2026 (extended from 31 Oct; EDAS) · notification 15 Jan 2027 · camera-ready 15 Feb 2027",
+   "website": "https://radarconf2027.org",
+   "h5": null,
+   "accept": null,
+   "impact": null,
+   "citescore": null,
+   "fit": "IEEE AESS flagship radar conference: radar systems and signal processing, cognitive radar, ISAC, STAP and clutter, mmWave/THz sensing, distributed and airborne radar, EW/anti-jamming, AI/ML target classification. Accepted papers considered for a special section of IEEE TAES. Every ~5 years the series runs as the IEEE International Radar Conference (RADAR 2020 Washington, RADAR 2025 Atlanta).",
+   "domain": "Radar",
+   "type": "Conference",
+   "deadline_date": "2026-11-30",
+   "abstract_date": null,
+   "deadline_status": "confirmed",
+   "conf_dates": "1–6 May 2027 (main conference 4–6 May)",
+   "location": "Bengaluru, India",
+   "deadline_source": "https://radarconf2027.org/important-dates/",
+   "rank": "B",
+   "watch_urls": [
+    "https://radarconf2027.org/important-dates/",
+    "https://radarconf2027.org"
+   ],
+   "cycle_years": 1
+  },
+  {
+   "cat": "Radar",
+   "tier": "Radar",
+   "type": "Conference",
+   "domain": "Radar",
+   "impact": null,
+   "citescore": null,
+   "h5": null,
+   "accept": null,
+   "abstract_date": null,
+   "name": "EuRAD 2027",
+   "difficulty": "Moderate",
+   "rank": "A",
+   "website": "https://www.eumw.eu",
+   "deadline": "Not announced; EuRAD 2026 paper deadline was 27 Mar 2026 (4-page paper), notification 29 May",
+   "deadline_date": "2027-03-26",
+   "deadline_status": "estimated",
+   "conf_dates": "3–8 Oct 2027 (European Microwave Week)",
+   "location": "Milan, Italy",
+   "deadline_source": "https://www.eumwa.org/en/30st-eumw2027.html?cmp_id=20&news_id=257&vID=50",
+   "watch_urls": [
+    "https://www.eumw.eu/homepage/authors/",
+    "https://www.eumw.eu"
+   ],
+   "cycle_years": 1,
+   "fit": "European Radar Conference, held within European Microwave Week: radar systems and technology from components to full systems — waveforms, signal processing, radar antennas and arrays, imaging and classification, MIMO, passive and networked radar, automotive and mmWave radar."
+  },
+  {
+   "cat": "Radar",
+   "tier": "Radar",
+   "type": "Conference",
+   "domain": "Radar",
+   "impact": null,
+   "citescore": null,
+   "h5": null,
+   "accept": null,
+   "abstract_date": null,
+   "name": "IET Radar 2027",
+   "difficulty": "Moderate",
+   "rank": "B",
+   "website": "https://radar.theiet.org",
+   "deadline": "Not announced; Radar 2022 abstract deadline was 18 Apr 2022",
+   "deadline_date": "2027-04-16",
+   "deadline_status": "estimated",
+   "conf_dates": "25–28 Oct 2027",
+   "location": "Glasgow, UK",
+   "deadline_source": "https://confevents.theiet.org/",
+   "watch_urls": [
+    "https://radar.theiet.org/call-for-submissions",
+    "https://radar.theiet.org"
+   ],
+   "cycle_years": 5,
+   "fit": "IET International Conference on Radar Systems, held every 5 years in the UK: radar phenomenology and modelling, MIMO and distributed radar, passive and quantum radar, SAR/ISAR imaging, cognitive radar, ISAC, AI/ML for radar, automotive and mmWave/THz. Selected papers go to IET Radar, Sonar & Navigation."
   },
   {
    "name": "EuCAP 2028",
@@ -883,6 +964,24 @@
    "sjr": 4.065,
    "quartile_source": "https://www.scimagojr.com/journalsearch.php?tip=sid&q=21100338322",
    "short": "GRSM"
+  },
+  {
+   "name": "IEEE Trans. Aerospace & Electronic Systems (TAES)",
+   "access": "Hybrid",
+   "difficulty": "High",
+   "website": "https://ieee-aess.org/publications/taes",
+   "impact": 5.7,
+   "citescore": 9.4,
+   "h5": null,
+   "fit": "Reference radar journal (IEEE AESS): radar systems and signal processing, detection, tracking, target recognition, EW, navigation and sensor fusion. Natural journal extension for RadarConf papers (special section). ~60-day review cycles, single-blind.",
+   "domain": "Radar",
+   "type": "Journal",
+   "gsrank": null,
+   "rank": "S",
+   "quartile": "Q1",
+   "sjr": 1.647,
+   "quartile_source": "https://www.scimagojr.com/journalsearch.php?tip=sid&q=17336",
+   "short": "TAES"
   }
  ]
 }

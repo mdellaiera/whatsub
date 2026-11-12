@@ -1,7 +1,7 @@
 {
  "meta": {
-  "updated": "2026-11-02",
-  "source": "Deadlines from official conference sites (checked 2026-10-27); Remote Sensing (MDPI) IF from JCR 2025 (released Jun 2026); other metrics approximate (JCR / Scopus / Google Scholar).",
+  "updated": "2026-11-12",
+  "source": "Deadlines from official conference sites (checked 2026-11-12); Remote Sensing (MDPI) IF from JCR 2025; other metrics approximate (JCR / Scopus / Google Scholar).",
   "rank_scale": {
    "S": "Flagship of its field",
    "A": "Top venue, strong reputation",
@@ -14,7 +14,7 @@
    "tba": "No date announced or estimated"
   },
   "quartile_note": "SCImago (SJR) 2025 best quartile, free to verify; JCR quartiles may differ.",
-  "deadline_checked": "2026-10-27"
+  "deadline_checked": "2026-11-12"
  },
  "conferences": [
   {
@@ -22,7 +22,7 @@
    "cat": "CV / ML",
    "tier": "Top CV/ML",
    "difficulty": "Very high",
-   "deadline": "Registration 10 Nov 2026 · paper 16 Nov 2026 · supplementary 23 Nov 2026 (AoE, no extensions)",
+   "deadline": "Registration 10 Nov 2026 (closed) · paper 16 Nov 2026 · supplementary 23 Nov 2026 (AoE, no extension) · decisions 25 Feb 2027",
    "website": "https://cvpr.thecvf.com",
    "h5": 440,
    "accept": "~22%",
@@ -34,7 +34,7 @@
    "deadline_date": "2026-11-16",
    "abstract_date": "2026-11-10",
    "deadline_status": "confirmed",
-   "conf_dates": "20–25 Jun 2027",
+   "conf_dates": "20–25 Jun 2027 (main conference 22–25 Jun)",
    "location": "Seattle, USA",
    "deadline_source": "https://cvpr.thecvf.com/Conferences/2027/CallForPapers",
    "rank": "S",
@@ -102,7 +102,7 @@
    "cat": "CV / ML",
    "tier": "Top CV/ML",
    "difficulty": "Extremely high",
-   "deadline": "Not announced; typically late Jan",
+   "deadline": "Abstract 14 Jan 2027 · full paper 22 Jan 2027 (AoE)",
    "website": "https://icml.cc",
    "h5": 300,
    "accept": "~27%",
@@ -111,13 +111,13 @@
    "fit": "New ML method, optimization approach, learning theory, generalizable model, or scalable training strategy.",
    "domain": "ML/DL",
    "type": "Conference",
-   "deadline_date": "2027-01-28",
-   "deadline_status": "estimated",
-   "conf_dates": "TBA (Jul 2027)",
-   "location": "South America (city TBA)",
-   "deadline_source": "https://icml.cc/Conferences/FutureMeetings",
+   "deadline_date": "2027-01-22",
+   "deadline_status": "confirmed",
+   "conf_dates": "31 Jul–6 Aug 2027 (main conference 2–4 Aug)",
+   "location": "Rio de Janeiro, Brazil (Riocentro)",
+   "deadline_source": "https://icml.cc/Conferences/2027/Dates",
    "rank": "S",
-   "abstract_date": null,
+   "abstract_date": "2027-01-14",
    "watch_urls": [
     "https://icml.cc/Conferences/2027/Dates",
     "https://icml.cc/Conferences/2027/CallForPapers"
@@ -183,7 +183,7 @@
    "cat": "Remote Sensing",
    "tier": "Top RS conference",
    "difficulty": "Moderate",
-   "deadline": "Submission opens 10 Nov 2026 · abstract/manuscript 11 Jan 2027 · notification 12 Mar 2027",
+   "deadline": "Submission system open since 10 Nov 2026 · abstract/manuscript 11 Jan 2027 · notification 12 Mar 2027",
    "website": "https://2027.ieeeigarss.org",
    "h5": 70,
    "accept": "~70%",
@@ -236,7 +236,7 @@
    "cat": "Radar",
    "tier": "SAR / radar",
    "difficulty": "Moderate",
-   "deadline": "Paper 30 Nov 2026 (extended from 31 Oct; EDAS) · notification 15 Jan 2027 · camera-ready 15 Feb 2027",
+   "deadline": "Paper 30 Nov 2026, hard deadline (extended from 31 Oct; EDAS) · notification 15 Jan 2027 · camera-ready 15 Feb 2027",
    "website": "https://radarconf2027.org",
    "h5": null,
    "accept": null,
@@ -257,6 +257,32 @@
     "https://radarconf2027.org"
    ],
    "cycle_years": 1
+  },
+  {
+   "type": "Conference",
+   "impact": null,
+   "citescore": null,
+   "h5": null,
+   "abstract_date": null,
+   "cycle_years": 1,
+   "name": "ICASSP 2028",
+   "cat": "Signal processing",
+   "tier": "Signal processing",
+   "difficulty": "Medium-high",
+   "domain": "Radar",
+   "rank": "A",
+   "website": "https://2028.ieeeicassp.org",
+   "accept": "~45%",
+   "deadline": "ICASSP 2027 (Toronto, 16–21 May 2027) closed 23 Sep 2026; 2028 deadline not announced, expected ~late Sep 2027",
+   "deadline_date": "2027-09-22",
+   "deadline_status": "estimated",
+   "conf_dates": "28 May–2 Jun 2028",
+   "location": "Tokyo, Japan",
+   "deadline_source": "https://signalprocessingsociety.org/events/2027-ieee-international-conference-acoustics-speech-and-signal-processing-icassp",
+   "watch_urls": [
+    "https://2028.ieeeicassp.org"
+   ],
+   "fit": "IEEE Signal Processing Society flagship (4-page papers): radar and array signal processing, sensor arrays, detection and estimation, SAR/ISAR, ISAC, plus ML for signals, speech and audio. Very large (~7,000 submissions); good venue for radar signal-processing methods."
   },
   {
    "cat": "Radar",
@@ -299,12 +325,12 @@
    "difficulty": "Moderate",
    "rank": "B",
    "website": "https://radar.theiet.org",
-   "deadline": "Not announced; Radar 2022 abstract deadline was 18 Apr 2022",
-   "deadline_date": "2027-04-16",
-   "deadline_status": "estimated",
+   "deadline": "Full paper 22 Feb 2027 (5–6 pages recommended, IET template, via Oxford Abstracts) · notification 28 May 2027 · final paper 1 Sep 2027",
+   "deadline_date": "2027-02-22",
+   "deadline_status": "confirmed",
    "conf_dates": "25–28 Oct 2027",
    "location": "Glasgow, UK",
-   "deadline_source": "https://confevents.theiet.org/",
+   "deadline_source": "https://radar.theiet.org/call-for-submissions",
    "watch_urls": [
     "https://radar.theiet.org/call-for-submissions",
     "https://radar.theiet.org"
@@ -405,11 +431,11 @@
    "website": "https://www.atrasc.com",
    "h5": null,
    "accept": "~75%",
-   "deadline": "Paper 18 Jan 2027 (extended abstract 1 p. or summary paper 2–4 pp.)",
+   "deadline": "Paper 18 Jan 2027 (extended abstract 1 p. or summary paper 2–4 pp.) · notification 1 Mar 2027",
    "deadline_date": "2027-01-18",
    "deadline_status": "confirmed",
    "conf_dates": "23–28 May 2027",
-   "location": "Gran Canaria, Spain",
+   "location": "Gran Canaria, Spain (ExpoMeloneras)",
    "deadline_source": "https://www.atrasc.com/callforpapers.php",
    "watch_urls": [
     "https://www.atrasc.com/callforpapers.php"
@@ -471,6 +497,33 @@
    "cycle_years": 1
   },
   {
+   "type": "Conference",
+   "impact": null,
+   "citescore": null,
+   "h5": null,
+   "abstract_date": null,
+   "cycle_years": 1,
+   "name": "IEEE FLEPS 2027",
+   "cat": "Sensors",
+   "tier": "Flexible sensors",
+   "difficulty": "Moderate",
+   "domain": "Antenna/Propagation",
+   "rank": "C",
+   "website": "https://ieee-sensors.org/conferences/ieee-fleps-2027/",
+   "accept": null,
+   "deadline": "Call not yet published; FLEPS 2026 deadlines were 1 Mar (IEEE Sensors Letters option) and 23 Mar 2026 (proceedings option)",
+   "deadline_date": "2027-03-22",
+   "deadline_status": "estimated",
+   "conf_dates": "11–14 Jul 2027",
+   "location": "Cambridge, UK",
+   "deadline_source": "https://2026.ieee-fleps.org/authors/call-for-papers",
+   "watch_urls": [
+    "https://ieee-sensors.org/conferences/ieee-fleps-2027/",
+    "https://2027.ieee-fleps.org"
+   ],
+   "fit": "IEEE Sensors Council conference on flexible, printed and stretchable electronics: printed sensors and antennas, RFID and smart labels, wearable/implantable systems, large-area and sustainable electronics. Option to publish in IEEE Sensors Letters instead of the proceedings."
+  },
+  {
    "name": "KDD 2027",
    "cat": "Applied AI / Data",
    "tier": "Applied AI",
@@ -527,7 +580,7 @@
    "cat": "Applied AI / Data",
    "tier": "Applied AI",
    "difficulty": "High",
-   "deadline": "Abstract 4 Jan 2027 · paper 11 Jan 2027 (AoE) · notification 21 Apr 2027",
+   "deadline": "Abstract 4 Jan 2027 · paper 11 Jan 2027 (AoE) · summary rejects 25 Feb · notification 21 Apr 2027",
    "website": "https://2027.ijcai.org",
    "h5": 150,
    "accept": "~14%",

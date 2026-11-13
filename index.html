@@ -111,7 +111,7 @@ footer{margin-top:24px;text-align:center;color:var(--muted);font-size:12px}
 <circle cx="32" cy="26" r="3" fill="#0f1420"/>
 <circle cx="37.50" cy="16.47" r="3.4" fill="#0f1420"/></svg><span>What<span class="s">Sub</span></span></h1>
   <div class="tagline">Where to submit next, and what's due</div>
-  <p class="sub">Conferences &amp; journals for <b>antenna/propagation</b>, <b>remote sensing</b>, <b>radar</b>, and <b>machine/deep learning</b>. Difficulty &amp; best-fit notes are from <em>Publications.pdf</em>; deadlines are checked against official conference sites; quartiles &amp; SJR from SCImago.</p>
+  <p class="sub">Conferences &amp; journals for <b>antenna/propagation</b>, <b>remote sensing</b>, <b>radar &amp; signal processing</b>, and <b>machine/deep learning</b>. Difficulty &amp; best-fit notes are from <em>Publications.pdf</em>; deadlines are checked against official conference sites; quartiles &amp; SJR from SCImago.</p>
   <div class="updated" id="updated"></div>
 </header>
 
@@ -183,7 +183,7 @@ footer{margin-top:24px;text-align:center;color:var(--muted);font-size:12px}
 <script>
 const DATA_URL='venues.json';
 const domColor={"Antenna/Propagation":"#f0a868","Remote Sensing":"#5fd1a6","ML/DL":"#c98bff","Radar":"#f25555"};
-const domLabel={"Antenna/Propagation":"Antenna / Propagation","Remote Sensing":"Remote Sensing","ML/DL":"Machine / Deep Learning","Radar":"Radar"};
+const domLabel={"Antenna/Propagation":"Antenna / Propagation","Remote Sensing":"Remote Sensing","ML/DL":"Machine / Deep Learning","Radar":"Radar & Signal Processing"};
 const RANKS=["S","A","B","C"], QS=["Q1","Q2","Q3","Q4"];
 let DATA={conferences:[],journals:[]};
 let view="cards", typeView="all", domView="All", rankView="All", qView="All";
